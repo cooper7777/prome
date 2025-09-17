@@ -27,7 +27,7 @@ module Prome
         r.counter(:sidekiq_jobs_executed_total, docstring: "A counter of the total number of jobs sidekiq executed.")
         r.counter(:sidekiq_jobs_success_total, docstring: "A counter of the total number of jobs successfully processed by sidekiq.")
         r.counter(:sidekiq_jobs_failed_total, docstring: "A counter of the total number of jobs failed in sidekiq.")
-        r.histogram(:sidekiq_job_runtime_seconds, "A histogram of the job execution time.")
+        r.histogram(:sidekiq_job_runtime_seconds, docstring: "A histogram of the job execution time.")
       else
         r.counter(:sidekiq_jobs_enqueued_total, docstring: "A counter of the total number of jobs sidekiq enqueued.")
         r.gauge(:sidekiq_jobs_waiting_count, "The number of jobs waiting to process in sidekiq.")
