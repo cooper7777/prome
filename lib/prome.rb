@@ -15,7 +15,7 @@ module Prome
     
     # rails
     unless defined?(::Sidekiq) && ::Sidekiq.server?
-      r.counter(:rails_requests_total, docstring: "A counter of the total number of HTTP requests rails processed.", labels: [ 'controller', 'action', 'status', 'format', 'method'])
+      r.counter(:rails_requests_total, docstring: "A counter of the total number of HTTP requests rails processed.", labels: [ :controller, :action, :status, :format, :method])
       r.histogram(:rails_request_duration_seconds, docstring: "A histogram of the response latency.")
       r.histogram(:rails_view_runtime_seconds, docstring: "A histogram of the view rendering time.")
       r.histogram(:rails_db_runtime_seconds, docstring: "A histogram of the activerecord execution time.")
