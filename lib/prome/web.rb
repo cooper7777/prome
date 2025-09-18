@@ -1,11 +1,11 @@
-require 'prometheus/client'
+require 'prometheus/middleware/exporter'
 
 module Prome
   class Web
     class << self
       def call(env)
         refresh
-        exporter = Prometheus::Client::Rack::Exporter.new(nil, registry: Prome.registry, path: "/")
+        exporter = Prometheus::Middleware::Exporter.new(nil, registry: Prome.registry, path: "/")
         exporter.call(env)
       end
 
