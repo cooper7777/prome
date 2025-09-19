@@ -23,12 +23,12 @@ module Prome
             start = Time.now
             begin
               yield
-              Prome.get(:sidekiq_jobs_success_total).increment(labels)
+              Prome.get(:sidekiq_jobs_success_total).increment(labels: labels)
             rescue Exception
-              Prome.get(:sidekiq_jobs_failed_total).increment(labels)
+              Prome.get(:sidekiq_jobs_failed_total).increment(labels: labels)
               raise
             ensure
-              Prome.get(:sidekiq_jobs_executed_total).increment(labels)
+              Prome.get(:sidekiq_jobs_executed_total).increment(labels: labels)
               Prome.get(:sidekiq_job_runtime_seconds).observe(labels, elapsed(start))
             end
           end
@@ -42,7 +42,7 @@ module Prome
         class Client
           def call(worker, job, queue, redis_pool)
             labels = Instrumentation.labelize(worker, job, queue)
-            Prome.get(:sidekiq_jobs_enqueued_total).increment(labels)
+            Prome.get(:sidekiq_jobs_enqueued_total).increment(labels: labels)
             yield
           end
         end

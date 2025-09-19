@@ -24,12 +24,12 @@ module Prome
     # sidekiq
     if defined?(::Sidekiq)
       if ::Sidekiq.server?
-        r.counter(:sidekiq_jobs_executed_total, docstring: "A counter of the total number of jobs sidekiq executed.")
-        r.counter(:sidekiq_jobs_success_total, docstring: "A counter of the total number of jobs successfully processed by sidekiq.")
-        r.counter(:sidekiq_jobs_failed_total, docstring: "A counter of the total number of jobs failed in sidekiq.")
+        r.counter(:sidekiq_jobs_executed_total, docstring: "A counter of the total number of jobs sidekiq executed.", labels: [:queue, :worker])
+        r.counter(:sidekiq_jobs_success_total, docstring: "A counter of the total number of jobs successfully processed by sidekiq.", labels: [:queue, :worker])
+        r.counter(:sidekiq_jobs_failed_total, docstring: "A counter of the total number of jobs failed in sidekiq.", labels: [:queue, :worker])
         r.histogram(:sidekiq_job_runtime_seconds, docstring: "A histogram of the job execution time.")
       else
-        r.counter(:sidekiq_jobs_enqueued_total, docstring: "A counter of the total number of jobs sidekiq enqueued.")
+        r.counter(:sidekiq_jobs_enqueued_total, docstring: "A counter of the total number of jobs sidekiq enqueued.", labels: [:queue, :worker])
         r.gauge(:sidekiq_jobs_waiting_count, docstring: "The number of jobs waiting to process in sidekiq.")
       end
     end
