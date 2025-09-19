@@ -72,7 +72,7 @@ module Prome
         app = Rack::Builder.new do
           use Rack::CommonLogger, ::Sidekiq.logger
           use Rack::ShowExceptions
-          use Prometheus::Client::Rack::Exporter, registry: Prome.registry
+          use Prometheus::Middleware::Exporter, registry: Prome.registry
           run ->(env) { [404, {'Content-Type' => 'text/plain'}, ["Not Found\n"]]}
         end
 
