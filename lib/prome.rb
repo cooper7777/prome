@@ -37,6 +37,10 @@ module Prome
     r
   end
 
+  mattr_reader :config do
+    Prometheus::Client.config
+  end
+
   mattr_accessor :sidekiq_metrics_host do
     "0.0.0.0"
   end
@@ -44,9 +48,10 @@ module Prome
   mattr_accessor :sidekiq_metrics_port do
     9310
   end
-  
+
   class << self
     delegate :counter, :gauge, :histogram, :summary, :get, to: :registry
+    delegate :data_store, :to :config 
 
     def configure
       yield self
