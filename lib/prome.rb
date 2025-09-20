@@ -37,8 +37,8 @@ module Prome
     r
   end
 
-  mattr_reader :config do
-    Prometheus::Client.config
+  mattr_accessor :data_store do
+    Prometheus::Client.config.data_store
   end
 
   mattr_accessor :sidekiq_metrics_host do
@@ -51,7 +51,6 @@ module Prome
 
   class << self
     delegate :counter, :gauge, :histogram, :summary, :get, to: :registry
-    delegate :data_store, to: :config 
 
     def configure
       yield self
