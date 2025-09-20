@@ -29,7 +29,7 @@ module Prome
               raise
             ensure
               Prome.get(:sidekiq_jobs_executed_total).increment(labels: labels)
-              Prome.get(:sidekiq_job_runtime_seconds).observe(labels, elapsed(start))
+              Prome.get(:sidekiq_job_runtime_seconds).observe(elapsed(start), labels: labels)
             end
           end
 

@@ -16,9 +16,9 @@ module Prome
         duration = ending - start
 
         Prome.get(:rails_requests_total).increment(labels: labels)
-        # Prome.get(:rails_request_duration_seconds).observe(labels, ms2s(duration))
-        # Prome.get(:rails_view_runtime_seconds).observe(labels, ms2s(payload[:view_runtime]))
-        # Prome.get(:rails_db_runtime_seconds).observe(labels, ms2s(payload[:db_runtime]))
+        Prome.get(:rails_request_duration_seconds).observe(ms2s(duration), labels: labels)
+        Prome.get(:rails_view_runtime_seconds).observe(ms2s(payload[:view_runtime]), labels: labels)
+        Prome.get(:rails_db_runtime_seconds).observe(ms2s(payload[:db_runtime]), labels: labels)
       end
     end
   end
