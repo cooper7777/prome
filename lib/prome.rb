@@ -51,7 +51,7 @@ module Prome
 
   class << self
     delegate :counter, :gauge, :histogram, :summary, :get, to: :registry
-    delegate :data_store, :to :config 
+    delegate :data_store, to: :config 
 
     def configure
       yield self
