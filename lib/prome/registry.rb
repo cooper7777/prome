@@ -7,9 +7,9 @@ module Prome
     def initialize
       @@registry
     end
-
-    def register(metric)
-      @@registry.register(metric)
+    
+    def method_missing(name, *args)
+      @@registry.send(name, *args)
     end
   end
 end
