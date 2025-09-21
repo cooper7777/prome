@@ -1,10 +1,15 @@
-require 'prometheus/client/registry'
+require 'prometheus/client'
 
 module Prome
-  class Registry < Prometheus::Client::Registry
-    # override register for convenience
+  class Registry
+    @@registry = Prometheus::Client.registry
+
+    def initialize
+      @@registry
+    end
+
     def register(metric)
-      get(metric.name.to_sym) || super(metric)
+      @@registry.register(metric)
     end
   end
 end
