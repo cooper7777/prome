@@ -13,7 +13,7 @@ module Prome
         if defined?(::Sidekiq)
           stats = ::Sidekiq::Stats.new
           stats.queues.each do |k, v|
-            Prome.get(:sidekiq_jobs_waiting_count).set(v, labels: {queue: k})
+            Prome.get(:sidekiq_jobs_waiting_queue_count).set(v, labels: {queue: k})
           end
         end
       end

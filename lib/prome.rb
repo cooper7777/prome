@@ -31,6 +31,7 @@ module Prome
       else
         r.counter(:sidekiq_jobs_enqueued_total, docstring: "A counter of the total number of jobs sidekiq enqueued.", labels: [:queue, :worker])
         r.gauge(:sidekiq_jobs_waiting_count, docstring: "The number of jobs waiting to process in sidekiq.", labels: [:queue, :worker])
+        r.gauge(:sidekiq_jobs_waiting_queue_count, docstring: "The number of jobs waiting to process in sidekiq.", labels: [:queue])
       end
     end
 
