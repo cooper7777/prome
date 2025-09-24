@@ -12,7 +12,7 @@ require_relative 'prome/data_store'
 
 module Prome
   mattr_reader :registry do
-    DATASTORE_DIR = "#{Dir.pwd}/tmp/prom".freeze!
+    DATASTORE_DIR = "#{Dir.pwd}/tmp/prom".freeze
     Prometheus::Client.config.data_store = Prome::DataStore.new(dir: DATASTORE_DIR)
     r = Prome::Registry.new
     

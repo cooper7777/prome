@@ -1,3 +1,3 @@
 module Prome
-  VERSION = "0.2.29"
+  VERSION = "0.2.30"
 end
