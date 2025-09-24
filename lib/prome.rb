@@ -8,11 +8,12 @@ require_relative 'prome/version'
 require_relative 'prome/rails'
 require_relative 'prome/sidekiq'
 require_relative 'prome/registry'
-require 'prometheus/client/data_stores/direct_file_store'
+require_relative 'prome/data_store'
 
 module Prome
   mattr_reader :registry do
-    Prometheus::Client.config.data_store =  Prometheus::Client::DataStores::DirectFileStore.new(dir: "#{Dir.pwd}/tmp/prom")
+    DATASTORE_DIR = "#{Dir.pwd}/tmp/prom".freeze!
+    Prometheus::Client.config.data_store = Prome::DataStore.new(dir: DATASTORE_DIR)
     r = Prome::Registry.new
     
     # rails
