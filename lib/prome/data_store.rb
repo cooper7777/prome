@@ -104,7 +104,7 @@ module Prome
           end
 
           def increment(labels:, by: 1)
-            if @values_aggregation_mode == DirectFileStore::MOST_RECENT
+            if @values_aggregation_mode == DataStore::MOST_RECENT
               raise InvalidStoreSettingsError,
                     "The :most_recent aggregation does not support the use of increment"\
                       "/decrement"
